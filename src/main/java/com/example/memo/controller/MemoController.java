@@ -3,7 +3,10 @@ package com.example.memo.controller;
 import com.example.memo.dto.MemoRequestDto;
 import com.example.memo.dto.MemoResponseDto;
 import com.example.memo.entity.Memo;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,33 +31,5 @@ public class MemoController {
         memoList.put(memoId, memo);
 
         return new MemoResponseDto(memo);
-    }
-
-    @GetMapping("/{id}")
-    public MemoResponseDto findMemoById(@PathVariable Long id) {
-
-        Memo memo = memoList.get(id);
-
-        return new MemoResponseDto(memo);
-    }
-
-    @PutMapping("/{id}")
-    public MemoResponseDto updateMemoById(
-            @PathVariable Long id,
-            @RequestBody MemoRequestDto requestDto
-    ) {
-
-        Memo memo = memoList.get(id);
-
-        memo.update(requestDto);
-
-        return new MemoResponseDto(memo);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteMemo(
-            @PathVariable Long id
-    ) {
-        memoList.remove(id);
     }
 }
